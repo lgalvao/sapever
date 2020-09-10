@@ -1,0 +1,67 @@
+spring:
+  application:
+    name: sape
+  profiles:
+    active: db-psql
+  mvc:
+    locale: pt_BR
+  jpa:
+    open-in-view: true
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+  devtools:
+    livereload:
+      port: 35730
+logging:
+  file:
+    name: ./logs/sape.log
+  level:
+    root: info
+server:
+  error:
+    whitelabel:
+      enabled: true
+  port: 9090
+  servlet:
+    context-path: /
+
+aplicacao:
+  etapas-ativas: 1, 2, 3, 4, 5
+  pleito: 7922
+  eleicao: 8328
+  processo: 7088
+  turno: 1
+
+---
+spring:
+  profiles: db-memoria
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  datasource:
+    url: "jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE"
+    username: sa
+    password: sa
+
+---
+spring:
+  profiles: db-psql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:postgresql://127.0.0.1:5432/postgres
+    username: leonardo
+    password: admin
+
+---
+spring:
+  profiles: db-oracle
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:oracle:thin:@desenvolvimentobd:1521:admdes2
+    username: X
+    password: X

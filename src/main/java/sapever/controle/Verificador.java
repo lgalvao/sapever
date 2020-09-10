@@ -1,7 +1,9 @@
 package sapever.controle;
 
+import sapever.modelo.TipoPendencia;
+
 import java.util.Optional;
 
-public interface VerificadorPendencia {
+public interface Verificador {
     Optional<TipoPendencia> verificar();
 }

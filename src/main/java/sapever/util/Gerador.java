@@ -1,15 +1,16 @@
-package sapever.sape.util;
+package sapever.util;
 
 import com.github.javafaker.Faker;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
-import sapever.json.PendenciaJson;
 
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.*;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 @Service

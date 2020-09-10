@@ -1,4 +1,4 @@
-package sapever.sape.util;
+package sapever.util;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
