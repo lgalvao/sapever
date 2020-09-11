@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "sape_pendencia")
 public class TipoPendencia {
     @Id
-    Integer id;
+    Integer codigo;
 
     String descricao;
 

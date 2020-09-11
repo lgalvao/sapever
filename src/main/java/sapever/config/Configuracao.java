@@ -1,6 +1,9 @@
 package sapever.config;
 
 import lombok.Data;
+import org.reflections.Reflections;
+import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.TypeAnnotationsScanner;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,5 +31,12 @@ public class Configuracao {
     @Bean
     public RestTemplate restTemplate() {
         return new RestTemplate();
+    }
+
+    @Bean
+    public Reflections reflections() {
+        return new Reflections("sapever.verificadores",
+                new SubTypesScanner(),
+                new TypeAnnotationsScanner());
     }
 }
