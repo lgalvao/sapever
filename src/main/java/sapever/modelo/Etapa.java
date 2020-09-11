@@ -1,8 +1,12 @@
 package sapever.modelo;
 
 import lombok.Data;
+import lombok.ToString;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Data
@@ -14,6 +18,7 @@ public class Etapa {
 
     String descricao;
 
+    @ToString.Exclude
     @ManyToMany(mappedBy = "etapas")
     List<TipoPendencia> tiposPendencias;
 }

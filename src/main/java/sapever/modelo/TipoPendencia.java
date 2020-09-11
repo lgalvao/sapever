@@ -2,10 +2,7 @@ package sapever.modelo;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 @Data
@@ -18,5 +15,6 @@ public class TipoPendencia {
     String descricao;
 
     @ManyToMany
+    @JoinTable(name = "sape_pendencia_etapa")
     List<Etapa> etapas;
 }

@@ -18,6 +18,7 @@ logging:
     name: ./logs/sape.log
   level:
     root: info
+    org.reflections: warn
 server:
   error:
     whitelabel:
