@@ -13,6 +13,7 @@ import sapever.modelo.TipoPendencia;
 import sapever.modelo.repo.RepoEtapa;
 import sapever.modelo.repo.RepoTipoPendencia;
 import sapever.verificadores.ConfigPendencia;
+import sapever.verificadores.Verificador;
 
 import java.util.List;
 import java.util.Set;

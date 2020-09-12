@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.reflections.Reflections;
 import org.springframework.stereotype.Service;
 import sapever.config.Configuracao;
-import sapever.controle.Verificador;
+import sapever.verificadores.Verificador;
 import sapever.modelo.Etapa;
 import sapever.modelo.TipoPendencia;
 import sapever.modelo.Zona;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class Util {
+public class VerificadorUtil {
     final Reflections reflections;
 
     final RepoTipoPendencia repoTipoPendencia;

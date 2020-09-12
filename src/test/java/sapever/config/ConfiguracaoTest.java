@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.reflections.Reflections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import sapever.controle.Verificador;
+import sapever.verificadores.Verificador;
 import sapever.verificadores.ConfigPendencia;
 
 import static org.assertj.core.api.Assertions.assertThat;

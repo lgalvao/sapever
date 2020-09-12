@@ -1,4 +1,4 @@
-package sapever.controle;
+package sapever.verificadores;
 
 import sapever.modelo.Etapa;
 import sapever.modelo.Pendencia;
@@ -26,5 +26,7 @@ public interface Verificador {
      **/
     Optional<Pendencia> verificar(Zona zona, Etapa etapa);
 
-
+    default int codigo() {
+        return this.getClass().getAnnotation(ConfigPendencia.class).codigo();
+    }
 }

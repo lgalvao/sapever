@@ -13,4 +13,5 @@ public interface RepoTipoPendencia extends JpaRepository<TipoPendencia, Integer>
     @Query("select distinct tipoPendencia.codigo from TipoPendencia tipoPendencia " +
             "where :etapa member of tipoPendencia.etapas")
     List<Integer> codigosPendenciaEtapa(@Param("etapa") Etapa etapa);
+
 }

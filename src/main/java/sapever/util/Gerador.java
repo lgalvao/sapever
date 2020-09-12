@@ -15,38 +15,37 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class Gerador {
-    private final Faker faker = new Faker(Locale.getDefault(Locale.Category.DISPLAY));
+    public final static Faker faker = new Faker(Locale.forLanguageTag("pt_BR"));
 
-    public Faker faker() {
+    public static Faker faker() {
         return faker;
     }
 
-
-    public String gerarNome() {
+    public static String gerarNome() {
         return faker.name().fullName();
     }
 
-    public String gerarNomeSocial() {
+    public static String gerarNomeSocial() {
         return faker.gameOfThrones().character();
     }
 
-    public boolean gerarBooleano() {
+    public static boolean gerarBooleano() {
         return faker().bool().bool();
     }
 
-    public LocalDate gerarDataAntesDe(@NonNull LocalDate d, int diasMax) {
+    public static LocalDate gerarDataAntesDe(@NonNull LocalDate d, int diasMax) {
         Date dataMaxima = Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Date dataRetorno = faker.date().past(diasMax, TimeUnit.DAYS, dataMaxima);
         return dataParaLocalDate(dataRetorno);
     }
 
-    public LocalDate gerarDataDepoisDe(@NonNull LocalDate d, int diasMax) {
+    public static LocalDate gerarDataDepoisDe(@NonNull LocalDate d, int diasMax) {
         Date dataMinima = Date.from(d.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Date dataRetorno = faker.date().future(diasMax, TimeUnit.DAYS, dataMinima);
         return dataParaLocalDate(dataRetorno);
     }
 
-    public LocalDate gerarDataIntervalo(@NonNull LocalDate min, LocalDate max) {
+    public static LocalDate gerarDataIntervalo(@NonNull LocalDate min, LocalDate max) {
         Date dataMinima = Date.from(min.atStartOfDay(ZoneId.systemDefault()).toInstant());
         Date dataMaxima = Date.from(max.atStartOfDay(ZoneId.systemDefault()).toInstant());
 
@@ -54,45 +53,45 @@ public class Gerador {
         return dataParaLocalDate(dataRetorno);
     }
 
-    public LocalDate gerarDataNascimento() {
+    public static LocalDate gerarDataNascimento() {
         // Data nos últimos ~99 anos
         Date dataTemp = faker.date().past(99 * 365, TimeUnit.DAYS);
         return dataParaLocalDate(dataTemp);
     }
 
-    public int gerarInteiro(int min, int max) {
+    public static int gerarInteiro(int min, int max) {
         return faker.number().numberBetween(min, max);
     }
 
-    public String gerarEmail() {
+    public static String gerarEmail() {
         return StringUtils.stripAccents(faker.internet().emailAddress());
     }
 
-    public String gerarTelefone() {
+    public static String gerarTelefone() {
         return faker.phoneNumber().phoneNumber();
     }
 
-    public String gerarCep() {
+    public static String gerarCep() {
         return faker.address().zipCode();
     }
 
-    public String gerarDescLogradouro() {
+    public static String gerarDescLogradouro() {
         return faker.address().streetAddress();
     }
 
-    public String gerarMatricula() {
+    public static String gerarMatricula() {
         return faker.numerify("JE#######");
     }
 
-    public String gerarTituloEleitor() {
+    public static String gerarTituloEleitor() {
         return faker.numerify("############");
     }
 
-    public String gerarNis() {
+    public static String gerarNis() {
         return faker.numerify("###.#####.##-#");
     }
 
-    public String gerarCpf() {
+    public static String gerarCpf() {
         int digito1;
         int digito2;
         int resto;
@@ -142,7 +141,7 @@ public class Gerador {
         return numeroGerado;
     }
 
-    private LocalDate dataParaLocalDate(Date data) {
+    private static LocalDate dataParaLocalDate(Date data) {
         return Instant.ofEpochMilli(data.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
     }
 }

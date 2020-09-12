@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "sape_pendencia")
+@Table(name = "sape_tipo_pendencia")
 public class TipoPendencia {
     @Id
     Integer codigo;
@@ -15,6 +15,6 @@ public class TipoPendencia {
     String descricao;
 
     @ManyToMany
-    @JoinTable(name = "sape_pendencia_etapa")
+    @JoinTable(name = "sape_tipopendencia_etapa")
     List<Etapa> etapas;
 }

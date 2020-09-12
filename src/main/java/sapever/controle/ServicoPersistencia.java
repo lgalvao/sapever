@@ -10,7 +10,7 @@ import sapever.modelo.repo.RepoPendencia;
 public class ServicoPersistencia {
     final RepoPendencia repoPendencia;
 
-    void gravarPendencia(Pendencia pendencia) {
+    public void gravarPendencia(Pendencia pendencia) {
         repoPendencia.save(pendencia);
     }
 }
