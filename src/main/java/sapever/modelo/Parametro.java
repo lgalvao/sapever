@@ -8,11 +8,14 @@ import javax.persistence.Id;
 
 @Entity
 @Data
-public class Etapa {
+public class Parametro {
     @Id
     @Column(name = "COD_OBJETO")
     String id;
 
-    @Column(name = "DES_ETAPA")
-    String descricao;
+    @Column(name = "NOM_PARAMETRO")
+    String nome;
+
+    @Column(name = "VAL_PARAMETRO")
+    String valor;
 }

@@ -8,7 +8,7 @@ import sapever.modelo.Zona;
 import java.util.Optional;
 
 @Slf4j
-@ConfigPendencia(codigo = 1)
+@ConfigPendencia(numero = 1)
 public class OcorrenciasNaoRegistradasSupre implements Verificador {
     public Optional<Pendencia> verificar(Zona zona, Etapa etapa) {
         log.info("Verificando pendência {}", codigo());

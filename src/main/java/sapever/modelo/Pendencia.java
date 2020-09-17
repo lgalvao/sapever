@@ -3,30 +3,21 @@ package sapever.modelo;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import java.time.LocalDateTime;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "SAPE_VER_ZONA_PENDENCIA", schema = "ADMSUPRE2TESTE")
 @Data
 @Accessors(chain = true)
-@Table(name = "sape_pendencia")
 public class Pendencia {
     @Id
-    int id;
+    @Column(name = "COD_OBJETO")
+    String id;
 
-    @ManyToOne
-    Zona zona;
-
-    @ManyToOne
-    Etapa etapa;
-
-    @ManyToOne
-    TipoPendencia tipo;
-
+    @Lob
     String detalhamento;
 
-    LocalDateTime dataHoraRegistro;
+    @ManyToOne
+    @JoinColumn(name = "COD_OBJETO_TIPO_PENDENCIA", referencedColumnName = "COD_OBJETO")
+    TipoPendencia tipoPendencia;
 }

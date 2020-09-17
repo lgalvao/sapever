@@ -8,7 +8,7 @@ import sapever.modelo.Zona;
 import java.util.Optional;
 
 @Slf4j
-@ConfigPendencia(codigo = 3)
+@ConfigPendencia(numero = 3)
 public class QuantitativosDivergentes implements Verificador {
     public Optional<Pendencia> verificar(Zona zona, Etapa etapa) {
         log.info("Verificando pendência {}", codigo());

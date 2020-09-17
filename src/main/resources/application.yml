@@ -2,7 +2,7 @@ spring:
   application:
     name: sape
   profiles:
-    active: db-psql
+    active: db-oracle
   mvc:
     locale: pt_BR
   jpa:
@@ -47,22 +47,13 @@ spring:
 
 ---
 spring:
-  profiles: db-psql
-  jpa:
-    hibernate:
-      ddl-auto: validate
-  datasource:
-    url: jdbc:postgresql://127.0.0.1:5432/postgres
-    username: leonardo
-    password: admin
-
----
-spring:
   profiles: db-oracle
   jpa:
+#    database-platform: org.hibernate.dialect.Oracle12cDialect
     hibernate:
       ddl-auto: validate
   datasource:
-    url: jdbc:oracle:thin:@desenvolvimentobd:1521:admdes2
-    username: X
-    password: X
+    url: jdbc:oracle:thin:@desenvolvimentobd:1521:tredes2
+    username: ADMSUPRE2TESTE
+    password: B6bWGS7xg9uQ
+#    driver-class-name: oracle.jdbc.OracleDriver

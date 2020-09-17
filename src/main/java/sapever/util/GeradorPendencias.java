@@ -7,6 +7,7 @@ import sapever.modelo.Etapa;
 import sapever.modelo.Pendencia;
 import sapever.modelo.TipoPendencia;
 import sapever.modelo.Zona;
+import sapever.modelo.repo.Repo;
 import sapever.modelo.repo.RepoEtapa;
 import sapever.modelo.repo.RepoTipoPendencia;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class GeradorPendencias {
+    final Repo repo;
     final RepoTipoPendencia repoTipoPendencia;
     final RepoEtapa repoEtapa;
 
@@ -33,28 +35,22 @@ public class GeradorPendencias {
         return ps;
     }
 
-    public Pendencia gerarPendencia(Zona zona, Etapa etapa) {
-        TipoPendencia tipo = Gerador.faker.options().nextElement(etapa.getTiposPendencias());
+    public Pendencia gerarPendencia(Etapa etapa) {
+        TipoPendencia tipo = Gerador.faker.options().nextElement(repo.tiposPendencia(etapa));
         String detalhamento = Gerador.faker.lorem().paragraph();
 
         return new Pendencia()
-                .setTipo(tipo)
-                .setDetalhamento(detalhamento)
-                .setZona(zona)
-                .setEtapa(etapa)
-                .setDataHoraRegistro(LocalDateTime.now());
+                .setTipoPendencia(tipo)
+                .setDetalhamento(detalhamento);
     }
 
-    public Pendencia gerarPendencia(Zona zona, Etapa etapa, int cdTipoPendencia) {
+    public Pendencia gerarPendencia(Etapa etapa, int cdTipoPendencia) {
         TipoPendencia tipo = repoTipoPendencia.findById(cdTipoPendencia).orElseThrow();
         String detalhamento = Gerador.faker.lorem().paragraph();
 
         return new Pendencia()
-                .setTipo(tipo)
-                .setDetalhamento(detalhamento)
-                .setZona(zona)
-                .setEtapa(etapa)
-                .setDataHoraRegistro(LocalDateTime.now());
+                .setTipoPendencia(tipo)
+                .setDetalhamento(detalhamento);
     }
 
 }

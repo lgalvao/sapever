@@ -6,24 +6,23 @@ import org.hibernate.annotations.Immutable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
-@Table(name = "SAPE_TIPO_PENDENCIA", schema = "ADMSUPRE2TESTE")
 @Data
 @Immutable
-public class TipoPendencia {
+public class Polo {
     @Id
     @Column(name = "COD_OBJETO")
     String id;
 
+    @Column(name = "NUM_POLO")
     int numero;
 
-    @Column(name = "DES_PENDENCIA")
-    String descricao;
+    @OneToMany(mappedBy = "polo")
+    List<Zona> zonas;
 
-    boolean exibirSupre;
-
-    @Column(name = "SIT_BLOQUEIO")
-    boolean situacaoBloqueio;
+    @OneToMany(mappedBy = "polo")
+    List<SuporteTecnologico> sts;
 }

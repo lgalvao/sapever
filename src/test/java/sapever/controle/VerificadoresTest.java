@@ -10,13 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import sapever.modelo.Etapa;
 import sapever.modelo.TipoPendencia;
+import sapever.modelo.repo.Repo;
 import sapever.modelo.repo.RepoEtapa;
 import sapever.modelo.repo.RepoTipoPendencia;
 import sapever.verificadores.ConfigPendencia;
 import sapever.verificadores.Verificador;
 
-import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @SpringBootTest
 @Slf4j
@@ -26,6 +27,9 @@ class VerificadoresTest {
 
     @Autowired
     RepoEtapa repoEtapa;
+
+    @Autowired
+    Repo repo;
 
     Reflections reflections;
 
@@ -40,19 +44,19 @@ class VerificadoresTest {
     void chamarTodosVerificadores() throws Exception {
         for (var classe : reflections.getTypesAnnotatedWith(ConfigPendencia.class)) {
             Verificador verificador = (Verificador) classe.getDeclaredConstructor().newInstance();
-            verificador.verificar();
+//            verificador.verificar();
         }
     }
 
     @Test
     void chamarTodosVerificadoresDeUmaEtapa() throws Exception {
-        Etapa etapaGeracao = repoEtapa.findById(1).orElseThrow();
-        var codigosPendenciasEtapa = repoTipoPendencia.codigosPendenciaEtapa(etapaGeracao);
+        Etapa etapaGeracao = repoEtapa.findById("1").orElseThrow();
+        var codigosPendenciasEtapa = repo.codigosPendenciaEtapa(etapaGeracao);
         for (var classe : reflections.getTypesAnnotatedWith(ConfigPendencia.class)) {
-            int codigo = classe.getAnnotation(ConfigPendencia.class).codigo();
+            int codigo = classe.getAnnotation(ConfigPendencia.class).numero();
             if (codigosPendenciasEtapa.contains(codigo)) {
                 Verificador verificador = (Verificador) classe.getDeclaredConstructor().newInstance();
-                verificador.verificar();
+  //              verificador.verificar();
             }
         }
     }
@@ -74,19 +78,20 @@ class VerificadoresTest {
 
     private void verificarTipoPendencia(TipoPendencia tipoPendencia) throws Exception {
         for (Class<?> classeVerificador : classesVerificadores()) {
-            if (codPendencia(classeVerificador) == tipoPendencia.getCodigo()) {
-                objetoVerificador(classeVerificador).verificar();
+            if (codPendencia(classeVerificador) == tipoPendencia.getNumero()) {
+//                objetoVerificador(classeVerificador).verificar();
             }
         }
     }
 
     private void verificarEtapa(Etapa etapa) throws Exception {
-        List<Integer> codigosPendenciasEtapa = repoTipoPendencia.codigosPendenciaEtapa(etapa);
+        var numerosTiposPendenciasEtapa = repo.tiposPendencia(etapa)
+                .stream().map(TipoPendencia::getNumero).collect(Collectors.toSet());
 
         for (Class<?> classeVerificador : classesVerificadores()) {
             int codigo = codPendencia(classeVerificador);
-            if (codigosPendenciasEtapa.contains(codigo)) {
-                objetoVerificador(classeVerificador).verificar();
+            if (numerosTiposPendenciasEtapa.contains(codigo)) {
+//                objetoVerificador(classeVerificador).verificar();
             }
         }
     }
@@ -100,7 +105,7 @@ class VerificadoresTest {
     }
 
     private int codPendencia(Class<?> classe) {
-        return classe.getAnnotation(ConfigPendencia.class).codigo();
+        return classe.getAnnotation(ConfigPendencia.class).numero();
     }
 
 }
